@@ -22,7 +22,14 @@ class ConGraph {
         this.getBoard();
     }
     getContibutionGraph() {
-        let cg = document.createElement('div');
+        let cgWrapper = document.createElement('div');
+        cgWrapper.classList.add('cg_wrapper')
+        cgWrapper.addEventListener("click", (e) => {
+            document.querySelectorAll("div.prompt").forEach(el => {
+                if (el.classList.contains("prompt_active")) el.classList.remove("prompt_active")
+            })
+        })
+        cgWrapper.append()
 
     }
     // создаёт дни
@@ -55,16 +62,9 @@ class ConGraph {
         //обертка для того чтобы реализовать hover и selected эффекты
         let wrapper = document.createElement('div');
         wrapper.className = "cell_wrapper"
-        //выпадающая подсказка при клике на элемент
-        let prompt = document.createElement('div'),
-            promptTextContribution = document.createElement('p'),
-            promptTextDate = document.createElement('p');
-        prompt.classList.add("prompt")
-        promptTextContribution.textContent = count + " contributions"
-        let textDate = days[new Date(dNumber).getDay()] + ", " + month[new Date(dNumber).getMonth()] + " " + new Date(dNumber).getDate() + ", " + new Date(dNumber).getFullYear()
-        promptTextDate.textContent = textDate;
-        prompt.append(promptTextContribution);
-        prompt.append(promptTextDate);
+        let firstText = count + " contributions"
+        let secondText = days[new Date(dNumber).getDay()] + ", " + month[new Date(dNumber).getMonth()] + " " + new Date(dNumber).getDate() + ", " + new Date(dNumber).getFullYear()
+        let prompt = this.createPrompt(firstText, secondText);
         wrapper.append(prompt);
         //создаём  ячейку
         let cell = document.createElement('div');
@@ -78,6 +78,12 @@ class ConGraph {
         cell.dataset.weekDay = days[new Date(dNumber).getDay()]
         //добавить слушатель наведения и выбора
         wrapper.append(cell)
+        wrapper.addEventListener("click", (e) => {
+            document.querySelectorAll("div.prompt").forEach(el => {
+                if (el.classList.contains("prompt_active")) el.classList.remove("prompt_active")
+            })
+            e.target.parentNode.childNodes[0].classList.add("prompt_active")
+        })
         return wrapper
     }
     getDateFormat(dNumber) {
@@ -94,6 +100,22 @@ class ConGraph {
         if (count > 9 && count < 20) return "c10-19";
         if (count > 0 && count < 10) return "c1-9";
         if (count == 0) return "c0";
+    }
+    createPrompt(firstText, secondText) {
+        //выпадающая подсказка при клике на элемент
+        let prompt = document.createElement('div'),
+            promptTextContribution = document.createElement('p');
+        prompt.classList.add("prompt")
+        promptTextContribution.textContent = firstText;
+        prompt.append(promptTextContribution);
+        if (secondText) {
+            let promptTextDate = document.createElement('p');
+            promptTextDate.textContent = secondText;
+            prompt.append(promptTextDate);
+        } else {
+            prompt.classList.add("lite")
+        }
+        return prompt;
     }
 }
 (async () => {

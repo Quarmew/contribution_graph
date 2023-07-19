@@ -2,6 +2,17 @@
     width: 15px;
     height: 15px;
 }
+.cg_wrapper{
+    display: grid;
+    grid-template-columns: .25fr, 1fr;
+    grid-template-rows: .25fr, 1fr, .25fr;
+}
+.cg_wrapper_month_text{
+
+}
+.cg_wrapper_blocks{
+
+}
 .prompt{
     top: -45px;
     left: -66px;
@@ -18,6 +29,12 @@
     font-size: 10px;
     line-height: 12.1px;
 }
+.prompt .lite{
+    top: -25px;
+    left: -40px;
+}
+/*Не удалось правильно выставить относительно элемента*/
+/* 
 .prompt::after{
     content: "";
     width: 10px;
@@ -29,6 +46,7 @@
     left: 66px;
     z-index: -1;
 }
+*/
 .prompt p{
     margin: 0;
     padding: 0;
@@ -46,7 +64,7 @@
     border: 1px solid #959595;
 
 }
-.cell_wrapper:active .prompt{
+.prompt_active{
     display: block;
 }
 .c0 {
