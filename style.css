@@ -1,6 +1,4 @@
-.red {
-    background: red;
-    border: 1px solid black;
+.cell {
     width: 5px;
     height: 5px;
     margin: 1px;
