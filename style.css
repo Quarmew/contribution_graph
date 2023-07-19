@@ -1,7 +1,27 @@
-.red{
+.red {
     background: red;
     border: 1px solid black;
     width: 5px;
     height: 5px;
     margin: 1px;
+}
+
+.c0 {
+    background: #EDEDED;
+}
+
+.c1-9 {
+    background: #ACD5F2;
+}
+
+.c10-19 {
+    background: #7FA8C9;
+}
+
+.c20-29 {
+    background: #527BA0;
+}
+
+.c30 {
+    background: #254E77;
 }
