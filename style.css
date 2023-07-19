@@ -1,19 +1,52 @@
+.wrapper {
+    height: 98vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header_text {
+    margin-left: 90px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Inter', sans-serif;
+    color: #959494;
+    font-size: 12px;
+    line-height: 14.52px;
+}
+.header_text p{
+    margin-left: 10px;
+}
+
 .cell {
     width: 15px;
     height: 15px;
 }
-.cg_wrapper{
-    display: grid;
-    grid-template-columns: .25fr, 1fr;
-    grid-template-rows: .25fr, 1fr, .25fr;
+
+.cg_wrapper {
+    display: flex;
+    flex-direction: column;
 }
-.cg_wrapper_month_text{
+
+.blocks {
+    margin-left: 87px;
+    margin-top: 15px;
+    display: flex;
+    gap: 2px;
+    height: 17px;
+    align-items: center;
 
 }
-.cg_wrapper_blocks{
 
+.blocks p {
+    margin: 0 10px;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    color: #959494;
+    font-size: 8px;
 }
-.prompt{
+
+.prompt {
     top: -45px;
     left: -66px;
     display: none;
@@ -29,13 +62,31 @@
     font-size: 10px;
     line-height: 12.1px;
 }
-.prompt .lite{
-    top: -25px;
+
+.prompt-lite {
+    top: -30px;
     left: -40px;
 }
+
+.side_text_box {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 14.52px;
+    text-align: end;
+    padding-right: 10px;
+    color: #959494;
+}
+
+.board_wrapper {
+    display: flex;
+    gap: 2px
+}
+
 /*Не удалось правильно выставить относительно элемента*/
-/* 
-.prompt::after{
+/*
+.prompt::after {
     content: "";
     width: 10px;
     height: 10px;
@@ -47,26 +98,31 @@
     z-index: -1;
 }
 */
-.prompt p{
+.prompt p {
     margin: 0;
     padding: 0;
 }
-.prompt p:first-child{
+
+.prompt p:first-child {
     color: #fff;
     font-size: 12px;
     line-height: 14.52px;
 }
-.cell_wrapper{
+
+.cell_wrapper {
     position: relative;
     border: 1px solid #EDEDED;
 }
-.cell_wrapper:hover{
+
+.cell_wrapper:hover {
     border: 1px solid #959595;
 
 }
-.prompt_active{
+
+.prompt_active {
     display: block;
 }
+
 .c0 {
     background: #EDEDED;
 }
