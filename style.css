@@ -1,7 +1,6 @@
 .cell {
-    width: 5px;
-    height: 5px;
-    margin: 1px;
+    width: 10px;
+    height: 10px;
 }
 
 .c0 {
@@ -22,4 +21,17 @@
 
 .c30 {
     background: #254E77;
+}
+
+.board {
+    display: grid;
+    grid-row-gap: 2px;
+    grid-template-columns: repeat(51, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    grid-auto-flow: column;
+    width: 612px;
+}
+
+body{
+    background: #000;
 }

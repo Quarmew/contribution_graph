@@ -26,9 +26,10 @@ class ConGraph {
         var currentDate = new Date();
         // все дни внутри дива
         let board = document.createElement('div');
-        for (let i = 0; i > -351.; i--) {
+        board.className = "board"
+        for (let i = 351; i > 0.; i--) {
             //получаем дату = текущая дата - i дней
-            let d = new Date().setTime(currentDate.getTime() - (dayMilliseconds * i * -1))
+            let d = new Date().setTime(currentDate.getTime() - (dayMilliseconds * i))
             //создаём базовые ячейки
             let cell = document.createElement('div');
             cell.classList.add("cell")
