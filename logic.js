@@ -1,26 +1,30 @@
-const dayMilliseconds = 24 * 60 * 60 * 1000;
+
 class ConGraph {
     //конструктор
     constructor(objData) {
         //данные из json
         this.data = objData
 
-
+        //основной объект
         let cg = this.getContibutionGraph();
+        //текст сбоку
         let sideTextBox = document.createElement('div')
         sideTextBox.classList.add("side_text_box")
+        //обертка вокруг доски
         let boardWrapper = document.createElement("div");
         boardWrapper.append(sideTextBox)
         boardWrapper.append(this.getBoard())
-
         boardWrapper.classList.add('board_wrapper')
+        //текст вверху
         let headerText = document.createElement('div')
         headerText.classList.add('header_text')
         headerText.append()
+        //добавление всех элементов в основной объект по порядку
         cg.append(headerText)
         cg.append(boardWrapper)
         cg.append(this.createBlocks())
         document.querySelector('contributionGraph').append(cg);
+        //текст
         sideTextBox.append(document.createElement('p').textContent = document.querySelectorAll(".cell")[0].dataset.weekDay)
         sideTextBox.append(document.createElement('p'))
         sideTextBox.append(document.createElement('p').textContent = document.querySelectorAll(".cell")[2].dataset.weekDay)
@@ -31,16 +35,17 @@ class ConGraph {
         }
     }
     getContibutionGraph() {
+        //внутри него находятся все элементы
         let cgWrapper = document.createElement('div');
         cgWrapper.classList.add('cg_wrapper')
         return cgWrapper
-
     }
-    сreate
     createBlocks() {
+        //элемент в самом низу. 
         let list = document.createElement('div');
         list.classList.add("blocks")
         list.append(document.createElement('p'))
+        //отдельно добавляю ячейки, чтобы они имели отличную от других надписи
         list.append(this.createCell("c0", 1686750019399, 0, false, "No contributions"))
         list.append(this.createCell("c1-9", 1686750019399, 1, false, "1-9 contributions"))
         list.append(this.createCell("c10-19", 1686750019399, 10, false, "10-19 contributions"))
@@ -53,8 +58,9 @@ class ConGraph {
     }
     // создаёт ячейки
     getBoard() {
+        const dayMilliseconds = 24 * 60 * 60 * 1000;
         var currentDate = new Date();
-        // все дни внутри дива
+        // все ячейки внутри дива
         let board = document.createElement('div');
         board.className = "board"
         for (let i = 350; i >= 0.; i--) {
@@ -77,12 +83,14 @@ class ConGraph {
 
     }
     createCell(colorClass, dNumber, count, second = true, text) {
+        //массивы для dataset
         var days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
         var month = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-        //обертка для того чтобы реализовать hover и selected эффекты
+        //обертка ячейки
         let wrapper = document.createElement('div');
         wrapper.className = "cell_wrapper"
         let firstText = ""
+        //если text - есть, значит элемент будет иметь текст согласно переменной
         if (!text) {
             firstText = count + " contributions"
         } else {
@@ -150,6 +158,7 @@ class ConGraph {
         return prompt;
     }
 }
+//ассинхронная функция для вызова JSON данных
 (async () => {
     let response = await fetch("https://dpg.gg/test/calendar.json");
     if (response.ok) {
