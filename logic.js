@@ -21,6 +21,10 @@ class ConGraph {
 
         this.getBoard();
     }
+    getContibutionGraph() {
+        let cg = document.createElement('div');
+
+    }
     // создаёт дни
     getBoard() {
         var currentDate = new Date();
@@ -30,26 +34,52 @@ class ConGraph {
         for (let i = 351; i > 0.; i--) {
             //получаем дату = текущая дата - i дней
             let d = new Date().setTime(currentDate.getTime() - (dayMilliseconds * i))
-            //создаём базовые ячейки
-            let cell = document.createElement('div');
-            cell.classList.add("cell")
+            //базовый цвет
             let colorClass = "c0";
+            let count = 0;
             //если в этот день что то было, то:
             if (this.getDateFormat(d) in this.data) {
                 //определяем цвет через фунцию getColorClassFromCount
-                let count = this.data[this.getDateFormat(d)];
+                count = this.data[this.getDateFormat(d)];
                 colorClass = this.getColorClassFromCount(count)
-            } else colorClass = "c0";
-            //вешаем класс цвета
-            cell.classList.add(colorClass)
-            //указывает дату в айди чтобы можно было найти
-            cell.id = this.getDateFormat(d)
-            //добавить слушатель наведения и выбора
+            }
+            //получаем ячейку
+            let cell = this.getCell(colorClass, d, count)
             board.append(cell)
         }
         p.append(board);
     }
-    getCell() { }
+    getCell(colorClass, dNumber, count) {
+        var days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+        var month = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+        //обертка для того чтобы реализовать hover и selected эффекты
+        let wrapper = document.createElement('div');
+        wrapper.className = "cell_wrapper"
+        //выпадающая подсказка при клике на элемент
+        let prompt = document.createElement('div'),
+            promptTextContribution = document.createElement('p'),
+            promptTextDate = document.createElement('p');
+        prompt.classList.add("prompt")
+        promptTextContribution.textContent = count + " contributions"
+        let textDate = days[new Date(dNumber).getDay()] + ", " + month[new Date(dNumber).getMonth()] + " " + new Date(dNumber).getDate() + ", " + new Date(dNumber).getFullYear()
+        promptTextDate.textContent = textDate;
+        prompt.append(promptTextContribution);
+        prompt.append(promptTextDate);
+        wrapper.append(prompt);
+        //создаём  ячейку
+        let cell = document.createElement('div');
+        //даём общий класс
+        cell.classList.add("cell")
+        //указываем цвет
+        cell.classList.add(colorClass)
+        //указываем дату в качестве айди
+        cell.id = this.getDateFormat(dNumber)
+        //указываем день недели
+        cell.dataset.weekDay = days[new Date(dNumber).getDay()]
+        //добавить слушатель наведения и выбора
+        wrapper.append(cell)
+        return wrapper
+    }
     getDateFormat(dNumber) {
         //передаём число - получаем дату формата из JSON
         let date = new Date(dNumber);
